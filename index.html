@@ -12,44 +12,40 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="noise"></div>
-  <header class="nav-wrap">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="logo" href="#top" aria-label="Pijush home">P<span>.</span></a>
-      <div class="nav-links"><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a></div>
-      <a class="nav-cta" href="https://github.com/TEJAS-MK2/PIJUSH" target="_blank" rel="noreferrer">GitHub ↗</a>
-    </nav>
-  </header>
+  <div class="noise"></div><div class="cursor-glow"></div>
+  <header class="nav-wrap"><nav class="nav container" aria-label="Main navigation">
+    <a class="logo" href="#top" aria-label="Pijush home">P<span>.</span></a>
+    <div class="nav-links"><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a></div>
+    <div class="nav-right"><button class="command-btn" type="button" aria-label="Open command menu"><span>⌘</span>K</button><a class="nav-cta" href="https://github.com/TEJAS-MK2/PIJUSH" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+  </nav></header>
+
   <main id="top">
     <section class="hero container">
-      <div class="hero-copy reveal">
-        <p class="eyebrow"><span class="status-dot"></span> Open to building cool things</p>
+      <div class="hero-copy reveal"><p class="eyebrow"><span class="status-dot"></span> Open to building cool things</p>
         <h1>I build things<br /><em>with code.</em></h1>
-        <p class="hero-text">I'm Pijush — a programming student who likes turning ideas into clean, useful digital experiences.</p>
+        <p class="hero-text">I'm Pijush — a programming student who turns ideas into clean, useful digital experiences.</p>
         <div class="hero-actions"><a class="button primary" href="#work">Explore my work <span>↓</span></a><a class="button ghost" href="#contact">Let's talk <span>↗</span></a></div>
+        <div class="hero-meta"><span>SCROLL TO EXPLORE</span><i></i><span>01 / 04</span></div>
       </div>
-      <div class="hero-orbit reveal" aria-hidden="true">
-        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orb-core"><span>&lt;/&gt;</span></div>
-        <div class="floating-chip chip-one">Python</div><div class="floating-chip chip-two">Web</div><div class="floating-chip chip-three">Ideas</div>
-      </div>
+      <div class="hero-orbit reveal" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="orb-core"><span>&lt;/&gt;</span></div><div class="floating-chip chip-one">Python</div><div class="floating-chip chip-two">Web</div><div class="floating-chip chip-three">Ideas</div></div>
     </section>
+
     <section class="marquee" aria-label="Skills"><div class="marquee-track"><span>PROGRAMMING</span><b>✦</b><span>WEB DEVELOPMENT</span><b>✦</b><span>CREATIVE BUILDING</span><b>✦</b><span>PROBLEM SOLVING</span><b>✦</b><span>PROGRAMMING</span><b>✦</b><span>WEB DEVELOPMENT</span><b>✦</b><span>CREATIVE BUILDING</span><b>✦</b><span>PROBLEM SOLVING</span><b>✦</b></div></section>
-    <section id="about" class="section container two-col">
-      <div class="section-label reveal">01 — About</div>
-      <div class="section-content reveal"><h2>Curious by default.<br /><span>Builder by choice.</span></h2><p>I'm interested in programming because it sits at the intersection of logic and creativity. I enjoy learning how things work, experimenting with new ideas, and shipping projects that feel simple on the surface but thoughtful underneath.</p><div class="stats"><div><strong>01</strong><span>Curiosity</span></div><div><strong>∞</strong><span>Things to learn</span></div><div><strong>24/7</strong><span>Ideas running</span></div></div></div>
-    </section>
-    <section id="work" class="section container">
-      <div class="section-label reveal">02 — Selected work</div>
-      <div class="work-grid">
-        <article class="project project-large reveal"><div class="project-number">01</div><div class="project-visual visual-grid"><span></span><span></span><span></span><span></span></div><div class="project-info"><p>PERSONAL / 2026</p><h3>PIJUSH</h3><span>Personal website & digital playground ↗</span></div></article>
-        <article class="project reveal"><div class="project-number">02</div><div class="project-visual visual-code"><code>while (idea) {<br />&nbsp;&nbsp;build();<br />&nbsp;&nbsp;learn();<br />}</code></div><div class="project-info"><p>EXPERIMENT / ONGOING</p><h3>CODE LAB</h3><span>Experiments, prototypes & lessons ↗</span></div></article>
-        <article class="project reveal"><div class="project-number">03</div><div class="project-visual visual-signal"><i></i><i></i><i></i><i></i></div><div class="project-info"><p>FUTURE / NEXT</p><h3>THE NEXT IDEA</h3><span>Something worth building is coming ↗</span></div></article>
-      </div>
-    </section>
+
+    <section id="about" class="section container two-col"><div class="section-label reveal">01 — About</div><div class="section-content reveal"><div class="mini-kicker">A LITTLE ABOUT ME</div><h2>Curious by default.<br /><span>Builder by choice.</span></h2><p>I'm interested in programming because it sits at the intersection of logic and creativity. I enjoy learning how things work, experimenting with new ideas, and shipping projects that feel simple on the surface but thoughtful underneath.</p><div class="stats"><div><strong>01</strong><span>Curiosity</span></div><div><strong>∞</strong><span>Things to learn</span></div><div><strong>24/7</strong><span>Ideas running</span></div></div></div></section>
+
+    <section id="work" class="section container"><div class="section-label reveal">02 — Selected work</div><div class="work-grid">
+      <a class="project project-large reveal" href="case-study.html"><div class="project-number">01</div><div class="project-tag">FEATURED CASE STUDY ↗</div><div class="project-visual visual-grid"><span></span><span></span><span></span><span></span></div><div class="project-info"><p>PERSONAL / 2026</p><h3>PIJUSH</h3><span>Personal website & digital playground</span></div></a>
+      <a class="project reveal" href="case-study.html"><div class="project-number">02</div><div class="project-visual visual-code"><code>while (idea) {<br />&nbsp;&nbsp;build();<br />&nbsp;&nbsp;learn();<br />}</code></div><div class="project-info"><p>EXPERIMENT / ONGOING</p><h3>CODE LAB</h3><span>Experiments, prototypes & lessons</span></div></a>
+      <a class="project reveal" href="case-study.html"><div class="project-number">03</div><div class="project-visual visual-signal"><i></i><i></i><i></i><i></i></div><div class="project-info"><p>FUTURE / NEXT</p><h3>THE NEXT IDEA</h3><span>Something worth building is coming</span></div></a>
+    </div></section>
+
     <section class="section container philosophy"><div class="section-label reveal">03 — Philosophy</div><div class="quote reveal">“Make it useful.<br /><em>Make it yours.</em><br />Keep learning.”</div></section>
     <section id="contact" class="contact container reveal"><p class="eyebrow">Have an idea?</p><h2>Let's make<br /><em>something.</em></h2><a class="contact-link" href="https://github.com/TEJAS-MK2/PIJUSH" target="_blank" rel="noreferrer">Find me on GitHub <span>↗</span></a></section>
   </main>
   <footer class="footer container"><span>© 2026 Pijush</span><span>Built with curiosity &lt;3</span><a href="#top">Back to top ↑</a></footer>
+
+  <div class="command-overlay" aria-hidden="true"><div class="command-menu"><div class="command-head"><span>Navigate</span><button class="command-close" type="button">Esc</button></div><a href="#about">About <kbd>01</kbd></a><a href="#work">Work <kbd>02</kbd></a><a href="#contact">Contact <kbd>03</kbd></a><a href="case-study.html">Case study <kbd>↗</kbd></a><a href="https://github.com/TEJAS-MK2/PIJUSH" target="_blank" rel="noreferrer">GitHub <kbd>↗</kbd></a><div class="command-foot">Press <kbd>⌘ K</kbd> anytime</div></div></div>
   <script src="script.js"></script>
 </body>
 </html>
