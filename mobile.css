@@ -1,0 +1,31 @@
+/* Mobile-first polish layer */
+@media (max-width:900px){
+  .container{width:min(calc(100% - 32px),1240px)}
+  .nav-wrap{top:8px;padding:0 4px}.nav{height:60px;padding:0 8px 0 16px}
+  .nav-links{gap:0}.nav-links a{padding:9px 8px;font-size:11px}
+  .nav-cta{padding:10px 13px;font-size:12px;white-space:nowrap}
+  .hero{min-height:auto;grid-template-columns:1fr;gap:0;padding:58px 0 72px}
+  .hero-orbit{height:315px;order:-1;margin-bottom:4px;transform:none!important}
+  .hero-orbit:before{width:235px;height:235px}.orbit-a{width:min(84vw,350px);height:min(44vw,180px)}.orbit-b{width:min(51vw,215px);height:min(84vw,350px)}.orbit-c{width:min(68vw,285px);height:min(68vw,285px)}
+  .orb-core{width:112px;height:112px}.orb-core span{font-size:19px}.orb-core small{font-size:6px}
+  .planet-one{top:48px;right:13%}.planet-two{bottom:55px;left:13%}
+  .chip-one{top:10px;right:0}.chip-two{bottom:13px;left:0}.chip-three{top:125px;left:0}
+  .hero-topline{align-items:flex-start;gap:10px}.hero-index{display:none}
+  h1{font-size:clamp(50px,13.5vw,84px);line-height:.86;margin:20px 0 23px;max-width:100%}
+  .hero-text{font-size:15px;line-height:1.7;max-width:650px}.hero-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:27px}.button{width:100%;justify-content:center;padding:14px 16px}.hero-meta{margin-top:39px;font-size:8px}.hero-meta i{flex:1;max-width:70px}
+  .marquee{padding:14px 0}.marquee-track{gap:21px;font-size:9px}
+  .section,.capabilities{grid-template-columns:1fr;gap:28px;padding:88px 0}.section-label{font-size:9px}.section-content h2,.capabilities h2{font-size:clamp(42px,11.5vw,62px)}.section-content>p{font-size:15px;line-height:1.72}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:44px}.stats strong{font-size:25px}.stats span{font-size:8px;letter-spacing:.06em}
+  .work-grid{grid-column:auto;grid-template-columns:1fr;gap:12px}.project,.project-large{grid-row:auto;min-height:360px}.project-large{min-height:475px}.project-info{left:18px;right:18px;bottom:18px}.project-info h3{font-size:25px}.project-visual{inset:0 0 105px}.visual-grid{grid-template-columns:repeat(2,85px);grid-template-rows:repeat(2,85px)}.visual-code code{font-size:12px}
+  .capability-list>div{grid-template-columns:35px 1fr;gap:13px;padding:20px 0}.capability-list strong{font-size:17px}.capability-list p{grid-column:2;margin-top:-7px;font-size:12px;line-height:1.55}
+  .quote{font-size:clamp(46px,11.5vw,75px)}.contact{padding:115px 0 100px}.contact h2{font-size:clamp(64px,16vw,105px);margin:23px 0 43px}.contact-orb{width:240px;height:240px;right:-95px;top:45px}.contact-actions{display:grid;gap:14px}.contact-link,.copy-link{width:100%;justify-content:center}.footer{gap:12px;flex-wrap:wrap;padding:22px 0 30px}.footer span:nth-child(2){display:none}
+}
+@media (max-width:560px){
+  .container{width:calc(100% - 28px)}.nav{height:55px}.logo{font-size:22px}.nav-links a{font-size:10px;padding:8px 5px}.nav-cta{font-size:11px;padding:9px 10px}
+  .hero{padding-top:50px}.hero-orbit{height:275px}.floating-chip{font-size:9px;padding:7px 9px}.floating-chip b{display:none}
+  .hero-eyebrow{font-size:9px}.eyebrow{font-size:9px;letter-spacing:.1em}.hero-text{font-size:14px}.hero-meta span:first-child{display:none}.hero-meta i{max-width:none}
+  .section,.capabilities{padding:72px 0}.section-content h2,.capabilities h2{font-size:clamp(40px,11vw,57px)}.section-content>p{font-size:14px}.stats strong{font-size:22px}.stats span{font-size:7px}
+  .project,.project-large{min-height:330px}.project-large{min-height:425px}.project-info h3{font-size:23px}.project-info span{font-size:11px}.project-number{top:16px;left:17px}.project-tag{top:16px;right:17px;font-size:7px}.visual-grid{grid-template-columns:repeat(2,72px);grid-template-rows:repeat(2,72px)}
+  .capability-list strong{font-size:16px}.capability-list p{font-size:11px}.quote{font-size:clamp(43px,11vw,65px)}.contact{padding:95px 0 82px}.contact h2{font-size:clamp(58px,16vw,92px)}.footer{font-size:8px}
+}
+@media (prefers-reduced-motion:reduce){.hero-orbit{transform:none!important}}
