@@ -1,30 +1,5 @@
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
-  link.addEventListener('click', (event) => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      event.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-const orbit = document.querySelector('.hero-orbit');
-if (orbit && window.matchMedia('(pointer:fine)').matches) {
-  orbit.addEventListener('pointermove', (event) => {
-    const rect = orbit.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    orbit.style.transform = `perspective(900px) rotateY(${x * 5}deg) rotateX(${y * -5}deg)`;
-  });
-  orbit.addEventListener('pointerleave', () => {
-    orbit.style.transform = '';
-  });
-}
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.1});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{const target=document.querySelector(link.getAttribute('href'));if(target){event.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}}));
+const orbit=document.querySelector('.hero-orbit');if(orbit&&window.matchMedia('(pointer:fine)').matches){orbit.addEventListener('pointermove',event=>{const r=orbit.getBoundingClientRect(),x=(event.clientX-r.left)/r.width-.5,y=(event.clientY-r.top)/r.height-.5;orbit.style.transform=`perspective(900px) rotateY(${x*6}deg) rotateX(${y*-6}deg)`});orbit.addEventListener('pointerleave',()=>orbit.style.transform='')}
+const glow=document.querySelector('.cursor-glow');if(glow&&window.matchMedia('(pointer:fine)').matches){window.addEventListener('pointermove',e=>{glow.style.left=`${e.clientX}px`;glow.style.top=`${e.clientY}px`})}
+const overlay=document.querySelector('.command-overlay'),openBtn=document.querySelector('.command-btn'),closeBtn=document.querySelector('.command-close');const toggle=()=>overlay?.classList.toggle('open');openBtn?.addEventListener('click',toggle);closeBtn?.addEventListener('click',toggle);overlay?.addEventListener('click',e=>{if(e.target===overlay)toggle()});document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();toggle()}if(e.key==='Escape'&&overlay?.classList.contains('open'))toggle()});document.querySelectorAll('.command-menu a').forEach(a=>a.addEventListener('click',()=>overlay?.classList.remove('open')));
