@@ -1,0 +1,107 @@
+/* Mobile refinement layer — keeps the desktop design intact */
+@media (max-width: 900px){
+  :root{--mobile-gutter:20px}
+  html{scroll-padding-top:82px}
+  body{font-size:15px;padding-bottom:88px}
+  .container{width:min(calc(100% - 40px),var(--max))}
+  .nav-wrap{top:10px;margin:0 10px}
+  .nav{height:58px;padding:0 7px 0 16px}
+  .nav-right{gap:6px}
+  .nav-cta{padding:10px 13px;font-size:12px}
+  .hero{min-height:auto;grid-template-columns:1fr;gap:28px;padding:58px 0 72px}
+  .hero-topline{gap:12px}
+  .hero-index{display:none}
+  h1{font-size:clamp(52px,15vw,82px);line-height:.86;margin:22px 0 26px}
+  .hero-text{font-size:16px;line-height:1.65;max-width:42rem}
+  .hero-actions{margin-top:28px}
+  .hero-meta{margin-top:42px}
+  .hero-orbit{height:300px;max-width:100%;overflow:hidden}
+  .orbit-a{width:min(86vw,390px);height:min(48vw,220px)}
+  .orbit-b{width:min(54vw,260px);height:min(82vw,390px)}
+  .orbit-c{width:min(74vw,340px);height:min(74vw,340px)}
+  .chip-one{right:4px}.chip-two{left:4px}.chip-three{left:3%;top:42%}
+  .marquee{padding:14px 0}
+  .section,.capabilities{padding:92px 0;grid-template-columns:1fr;gap:34px}
+  .section-label{padding-top:0}
+  .section-content h2,.capabilities h2{font-size:clamp(42px,11vw,68px);margin-bottom:26px}
+  .section-content>p{font-size:15px;line-height:1.7}
+  .stats{gap:20px;justify-content:space-between;margin-top:42px}
+  .stats strong{font-size:27px}
+  .stats span{font-size:8px}
+  .work-grid{grid-column:auto;grid-template-columns:1fr;gap:14px}
+  .project,.project-large{min-height:420px;grid-row:auto}
+  .project-large{min-height:500px}
+  .project-visual{inset:0 0 115px}
+  .visual-grid{grid-template-columns:repeat(2,82px);grid-template-rows:repeat(2,82px)}
+  .capability-list>div{grid-template-columns:34px 1fr;gap:12px;padding:20px 0}
+  .capability-list strong{font-size:17px}
+  .capability-list p{grid-column:2;font-size:12px}
+  .footer{gap:14px;flex-wrap:wrap;padding-bottom:28px}
+  .contact{padding:110px 0 100px}
+  .contact h2{font-size:clamp(62px,17vw,105px);margin:20px 0 44px}
+}
+@media (max-width:560px){
+  .container{width:calc(100% - 32px)}
+  .nav-wrap{margin:0 7px}
+  .nav{height:54px;padding-left:14px}
+  .logo{font-size:23px}
+  .theme-toggle{width:34px;height:34px}
+  .nav-cta{padding:9px 12px;font-size:11px}
+  .hero{padding-top:48px;padding-bottom:56px}
+  .eyebrow{font-size:9px}
+  h1{font-size:clamp(48px,14vw,70px)}
+  .hero-text{font-size:15px}
+  .hero-meta{font-size:8px;gap:8px;margin-top:34px}
+  .hero-meta i{width:45px}
+  .hero-orbit{height:245px}
+  .orb-core{width:96px;height:96px}
+  .orb-core span{font-size:21px}
+  .floating-chip{padding:7px 9px;font-size:9px}
+  .chip-one{top:25px}.chip-two{bottom:28px}.chip-three{top:43%}
+  .section,.capabilities{padding:78px 0}
+  .section-label{font-size:9px}
+  .section-content h2,.capabilities h2{font-size:clamp(39px,11vw,58px)}
+  .stats{gap:12px}
+  .stats strong{font-size:23px}
+  .stats span{font-size:7px;letter-spacing:.07em}
+  .project,.project-large{min-height:390px;border-radius:22px}
+  .project-large{min-height:460px}
+  .project-number{top:16px;left:17px}.project-tag{top:16px;right:17px;font-size:8px}
+  .project-info{left:17px;right:17px;bottom:17px}
+  .project-info h3{font-size:25px}
+  .project-info span{font-size:11px}
+  .visual-grid{grid-template-columns:repeat(2,70px);grid-template-rows:repeat(2,70px)}
+  .contact{padding:90px 0 84px}
+  .footer{font-size:8px}
+  .mobile-nav{bottom:max(8px,env(safe-area-inset-bottom));width:calc(100% - 16px);padding:6px;border-radius:20px}
+  .mobile-nav a{min-height:34px;display:flex;align-items:center;justify-content:center;font-size:8px}
+  /* Keep dynamic feature panels inside the viewport */
+  .v11-section,.v12-section{padding:78px 0}
+  .v11-grid,.command-grid{grid-template-columns:1fr!important}
+  .v11-head,.v12-head{display:block!important}
+  .v11-head>p,.v12-head>p{margin-top:16px}
+  .insight-grid{grid-template-columns:1fr 1fr!important}
+  .compare-row,.build-week{grid-template-columns:1fr!important}
+  .command-repo{grid-template-columns:1fr}
+  .preview-frame{height:125px}
+  .change{grid-template-columns:76px 1fr}
+  .lab-gallery{grid-template-columns:1fr!important}
+  .lab-card{min-height:190px}
+  .lab-modal{padding:12px}
+  .lab-dialog{width:100%;max-height:86vh}
+  .lab-stage{min-height:300px}
+  .pwa-install,#install-app,.install-app,[data-install-app]{left:16px!important;right:16px!important;bottom:82px!important;width:auto!important;max-width:none!important}
+}
+@media (max-width:380px){
+  .nav-cta{padding:8px 9px;font-size:10px}
+  .theme-toggle{width:31px;height:31px}
+  .hero{padding-top:40px}
+  .hero-actions .button{font-size:12px;padding:13px 15px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr)}
+  .stats strong{font-size:21px}
+  .project,.project-large{min-height:360px}
+  .project-large{min-height:420px}
+}
+@supports(padding:max(0px)){
+  .mobile-nav{padding-bottom:max(6px,env(safe-area-inset-bottom))}
+}
