@@ -75,7 +75,6 @@
   .footer{font-size:8px}
   .mobile-nav{bottom:max(8px,env(safe-area-inset-bottom));width:calc(100% - 16px);padding:6px;border-radius:20px}
   .mobile-nav a{min-height:34px;display:flex;align-items:center;justify-content:center;font-size:8px}
-  /* Keep dynamic feature panels inside the viewport */
   .v11-section,.v12-section{padding:78px 0}
   .v11-grid,.command-grid{grid-template-columns:1fr!important}
   .v11-head,.v12-head{display:block!important}
@@ -90,7 +89,8 @@
   .lab-modal{padding:12px}
   .lab-dialog{width:100%;max-height:86vh}
   .lab-stage{min-height:300px}
-  .pwa-install,#install-app,.install-app,[data-install-app]{left:16px!important;right:16px!important;bottom:82px!important;width:auto!important;max-width:none!important}
+  /* Keep the install action clearly above the fixed mobile nav. */
+  .pwa-install,#install-app,.install-app,[data-install-app]{left:12px!important;right:12px!important;bottom:calc(112px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;min-height:46px;z-index:70}
 }
 @media (max-width:380px){
   .nav-cta{padding:8px 9px;font-size:10px}
@@ -101,6 +101,7 @@
   .stats strong{font-size:21px}
   .project,.project-large{min-height:360px}
   .project-large{min-height:420px}
+  .pwa-install,#install-app,.install-app,[data-install-app]{bottom:calc(116px + env(safe-area-inset-bottom))!important}
 }
 @supports(padding:max(0px)){
   .mobile-nav{padding-bottom:max(6px,env(safe-area-inset-bottom))}
