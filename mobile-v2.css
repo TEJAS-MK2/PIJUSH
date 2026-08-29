@@ -27,6 +27,8 @@
   .lab-stage{min-height:300px}
   /* One authoritative mobile position for the PWA install control. */
   #install-app,.install-app,.pwa-install,[data-install-app]{left:12px!important;right:12px!important;bottom:calc(116px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;min-height:46px;z-index:80;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+  /* Keep mobile content visible even if the reveal observer misses an element. */
+  .reveal{opacity:1!important;transform:none!important}
 }
 @media (max-width:380px){
   .nav-cta{padding:8px 9px;font-size:10px}
