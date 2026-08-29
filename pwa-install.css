@@ -1,4 +1,4 @@
-/* PWA install button — never overlap mobile navigation */
-#install-app,.install-app,.pwa-install,[data-install-app]{position:fixed;right:18px;bottom:18px;z-index:70;max-width:calc(100vw - 36px);white-space:nowrap}
-@media(max-width:560px){#install-app,.install-app,.pwa-install,[data-install-app]{left:16px!important;right:16px!important;bottom:calc(76px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;min-height:46px;display:flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:999px;white-space:normal;text-align:center;z-index:70}}
-@media(max-width:380px){#install-app,.install-app,.pwa-install,[data-install-app]{left:12px!important;right:12px!important;bottom:calc(78px + env(safe-area-inset-bottom))!important;font-size:14px}}
+/* PWA install control — single authoritative mobile position. */
+#install-app,.install-app,.pwa-install,[data-install-app]{position:fixed;right:18px;bottom:18px;z-index:80;max-width:calc(100vw - 36px);box-sizing:border-box}
+@media(max-width:560px){#install-app,.install-app,.pwa-install,[data-install-app]{left:12px!important;right:12px!important;bottom:calc(116px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;min-height:46px;display:flex;align-items:center;justify-content:center;box-sizing:border-box}}
+@media(max-width:380px){#install-app,.install-app,.pwa-install,[data-install-app]{left:10px!important;right:10px!important;bottom:calc(120px + env(safe-area-inset-bottom))!important}}
