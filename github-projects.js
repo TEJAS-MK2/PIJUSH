@@ -9,65 +9,8 @@ const featured=[
 ];
 const cache=()=>{try{const x=JSON.parse(localStorage.getItem(key));return x&&Date.now()-x.time<900000?x.data:null}catch{return null}};
 const save=data=>{try{localStorage.setItem(key,JSON.stringify({time:Date.now(),data}))}catch{}};
-function render(items){
-  if(!grid)return;
-  grid.innerHTML='';
-  items.forEach((p,i)=>{
-    const d=p.data||p;
-    const name=d.name||p.repo;
-    const card=document.createElement('a');
-    card.className=`project ${i===0?'project-large':''} reveal visible`;
-    card.href=`case-study.html?repo=${encodeURIComponent(name)}`;
-    card.target='_self';
-    const visual=i%3===0?'<div class="project-visual visual-grid"><span></span><span></span><span></span><span></span></div>':i%3===1?'<div class="project-visual visual-code"><span class="code-dot"></span><code>build();<br>learn();<br>ship();</code></div>':'<div class="project-visual visual-signal"><i></i><i></i><i></i><i></i><i></i></div>';
-    card.innerHTML=`<div class="project-number">${String(i+1).padStart(2,'0')}</div><div class="project-tag">${d.archived?'ARCHIVED':'LIVE'} / CASE STUDY ↗</div>${visual}<div class="project-info"><p>${esc(p.kind)}${d.pushed_at?` / UPDATED ${esc(fmt(d.pushed_at))}`:''}</p><h3>${esc(name).toUpperCase()}</h3><span>${esc(d.description||p.fallback)}</span><div class="project-live-meta"><b>${esc(d.language||'CODE')}</b><span>★ ${d.stargazers_count||0}</span><span>⑂ ${d.forks_count||0}</span></div></div>`;
-    grid.appendChild(card);
-  });
-}
-function addDashboard(items){
-  const work=document.querySelector('#work');
-  if(!work||document.querySelector('#github-dashboard'))return;
-  const data=items.map(x=>x.data||x);
-  const langs=[...new Set(data.map(x=>x.language).filter(Boolean))];
-  const dash=document.createElement('div');
-  dash.id='github-dashboard';
-  dash.className='github-dashboard reveal visible';
-  dash.innerHTML=`<div><span>GITHUB / LIVE</span><strong>${data.length}</strong><small>FEATURED REPOSITORIES</small></div><div><span>LANGUAGES</span><strong>${langs.length||1}</strong><small>${esc(langs.join(' · ')||'CODE')}</small></div><div><span>STARS</span><strong>${data.reduce((n,x)=>n+(x.stargazers_count||0),0)}</strong><small>PUBLIC SIGNAL</small></div><div><span>SYNC</span><strong>15m</strong><small>LOCAL CACHE</small></div>`;
-  work.appendChild(dash);
-  const controls=document.createElement('div');
-  controls.className='project-tools';
-  controls.innerHTML=`<input id="project-search" placeholder="Search featured projects…" aria-label="Search featured projects"><div class="project-filters"><button class="active" type="button" data-filter="all">All</button>${langs.map(l=>`<button type="button" data-filter="${esc(l)}">${esc(l)}</button>`).join('')}</div>`;
-  grid?.before(controls);
-  const apply=()=>{const q=(document.querySelector('#project-search')?.value||'').toLowerCase(),f=document.querySelector('.project-filters .active')?.dataset.filter||'all';grid?.querySelectorAll('.project').forEach(c=>{const text=(c.querySelector('h3')?.textContent||'')+' '+(c.querySelector('.project-info span')?.textContent||''),lang=c.querySelector('.project-live-meta b')?.textContent||'';c.style.display=(!q||text.toLowerCase().includes(q))&&(f==='all'||lang===f)?'':'none'})};
-  document.querySelector('#project-search')?.addEventListener('input',apply);
-  document.querySelectorAll('.project-filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.project-filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');apply()}));
-}
-function addLabSwitcher(){
-  const section=document.querySelector('#playground'),box=section?.querySelector('.code-play');
-  if(!section||!box||document.querySelector('#lab-switcher'))return;
-  const sw=document.createElement('div');sw.id='lab-switcher';sw.className='lab-switcher';sw.innerHTML='<button class="active" type="button" data-lab="js">JavaScript</button><button type="button" data-lab="css">CSS Motion</button><button type="button" data-lab="algo">Algorithm</button>';box.before(sw);
-  const input=document.querySelector('#code-input'),run=document.querySelector('#run-code'),out=document.querySelector('#code-output'),original=input.value;
-  const jsMode=()=>{input.value=original;run.textContent='Run ↗';run.dataset.mode='js';out.textContent='Press Run to execute your idea.'};
-  const cssMode=()=>{input.value='.orb { width:70px; height:70px; border-radius:50%; background:#baff45; animation:pulse 1.4s infinite alternate; }\n@keyframes pulse { to { transform:scale(1.6); } }';run.textContent='Preview ↗';run.dataset.mode='css';out.textContent='Press Preview to render the CSS.'};
-  const algoMode=()=>{input.value='const numbers = [8, 3, 7, 1, 5];\nconsole.log("Before:", numbers);\nconsole.log("Sorted:", [...numbers].sort((a,b)=>a-b));';run.textContent='Run ↗';run.dataset.mode='js';out.textContent='Press Run to execute the algorithm.'};
-  sw.addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;sw.querySelectorAll('button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');e.target.dataset.lab==='css'?cssMode():e.target.dataset.lab==='algo'?algoMode():jsMode()});
-  run.addEventListener('click',()=>{if(run.dataset.mode!=='css')return;const frame=document.createElement('iframe');frame.sandbox='allow-scripts';frame.title='CSS motion preview';frame.style.cssText='width:100%;height:150px;border:0;border-top:1px solid rgba(255,255,255,.08);background:#08080c';frame.srcdoc='<!doctype html><style>body{margin:0;display:grid;place-items:center;height:100vh;background:#08080c}.orb{width:70px;height:70px;border-radius:50%;background:#baff45;animation:pulse 1.4s infinite alternate}@keyframes pulse{to{transform:scale(1.6)}}</style><div class="orb"></div>';box.appendChild(frame);out.textContent='CSS preview rendered in a sandboxed frame.';setTimeout(()=>frame.remove(),8000)});
-  jsMode();
-}
-async function load(){
-  if(!grid)return;
-  const old=cache();
-  if(old){render(old);addDashboard(old);addLabSwitcher();return}
-  try{
-    const r=await fetch('https://api.github.com/users/TEJAS-MK2/repos?per_page=100&sort=updated',{headers:{Accept:'application/vnd.github+json'}});
-    if(!r.ok)throw Error(`GitHub ${r.status}`);
-    const repos=await r.json();
-    const byName=new Map(repos.map(r=>[r.name.toLowerCase(),r]));
-    const selected=featured.map(p=>({repo:p.repo,kind:p.kind,fallback:p.fallback,data:byName.get(p.repo.toLowerCase())||null}));
-    const usable=selected.map(p=>p.data?{...p,data:p.data}:p);
-    save(usable);render(usable);addDashboard(usable);addLabSwitcher();
-  }catch{
-    render(featured);addDashboard(featured);addLabSwitcher();
-  }
-}
+function render(items){if(!grid)return;grid.innerHTML='';items.forEach((p,i)=>{const d=p.data||p,name=d.name||p.repo,card=document.createElement('a');card.className=`project ${i===0?'project-large':''} reveal visible`;card.href=`case-study.html?repo=${encodeURIComponent(name)}`;card.target='_self';const visual=i%3===0?'<div class="project-visual visual-grid"><span></span><span></span><span></span><span></span></div>':i%3===1?'<div class="project-visual visual-code"><span class="code-dot"></span><code>build();<br>learn();<br>ship();</code></div>':'<div class="project-visual visual-signal"><i></i><i></i><i></i><i></i><i></i></div>';card.innerHTML=`<div class="project-number">${String(i+1).padStart(2,'0')}</div><div class="project-tag">${d.archived?'ARCHIVED':'LIVE'} / CASE STUDY ↗</div>${visual}<div class="project-info"><p>${esc(p.kind)}${d.pushed_at?` / UPDATED ${esc(fmt(d.pushed_at))}`:''}</p><h3>${esc(name).toUpperCase()}</h3><span>${esc(d.description||p.fallback)}</span><div class="project-live-meta"><b>${esc(d.language||'CODE')}</b><span>★ ${d.stargazers_count||0}</span><span>⑂ ${d.forks_count||0}</span></div></div>`;grid.appendChild(card)})}
+function addDashboard(items){const work=document.querySelector('#work');if(!work||document.querySelector('#github-dashboard'))return;const data=items.map(x=>x.data||x),langs=[...new Set(data.map(x=>x.language).filter(Boolean))],dash=document.createElement('div');dash.id='github-dashboard';dash.className='github-dashboard reveal visible';dash.innerHTML=`<div><span>GITHUB / LIVE</span><strong>${data.length}</strong><small>FEATURED REPOSITORIES</small></div><div><span>LANGUAGES</span><strong>${langs.length||1}</strong><small>${esc(langs.join(' · ')||'CODE')}</small></div><div><span>STARS</span><strong>${data.reduce((n,x)=>n+(x.stargazers_count||0),0)}</strong><small>PUBLIC SIGNAL</small></div><div><span>SYNC</span><strong>15m</strong><small>LOCAL CACHE</small></div>`;work.appendChild(dash);const controls=document.createElement('div');controls.className='project-tools';controls.innerHTML=`<input id="project-search" placeholder="Search featured projects…" aria-label="Search featured projects"><div class="project-filters"><button class="active" type="button" data-filter="all">All</button>${langs.map(l=>`<button type="button" data-filter="${esc(l)}">${esc(l)}</button>`).join('')}</div>`;grid?.before(controls);const apply=()=>{const q=(document.querySelector('#project-search')?.value||'').toLowerCase(),f=document.querySelector('.project-filters .active')?.dataset.filter||'all';grid?.querySelectorAll('.project').forEach(c=>{const text=(c.querySelector('h3')?.textContent||'')+' '+(c.querySelector('.project-info span')?.textContent||''),lang=c.querySelector('.project-live-meta b')?.textContent||'';c.style.display=(!q||text.toLowerCase().includes(q))&&(f==='all'||lang===f)?'':'none'})};document.querySelector('#project-search')?.addEventListener('input',apply);document.querySelectorAll('.project-filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.project-filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');apply()}))}
+function addLabSwitcher(){const section=document.querySelector('#playground'),box=section?.querySelector('.code-play');if(!section||!box||document.querySelector('#lab-switcher'))return;const sw=document.createElement('div');sw.id='lab-switcher';sw.className='lab-switcher';sw.innerHTML='<button class="active" type="button" data-lab="js">JavaScript</button><button type="button" data-lab="css">CSS Motion</button><button type="button" data-lab="algo">Algorithm</button>';box.before(sw);const input=document.querySelector('#code-input'),run=document.querySelector('#run-code'),out=document.querySelector('#code-output'),original=input.value;const jsMode=()=>{input.value=original;run.textContent='Run ↗';run.dataset.mode='js';out.textContent='Press Run to execute your idea.'};const cssMode=()=>{input.value='.orb { width:70px; height:70px; border-radius:50%; background:#baff45; animation:pulse 1.4s infinite alternate; }\n@keyframes pulse { to { transform:scale(1.6); } }';run.textContent='Preview ↗';run.dataset.mode='css';out.textContent='Press Preview to render the CSS.'};const algoMode=()=>{input.value='const numbers = [8, 3, 7, 1, 5];\nconsole.log("Before:", numbers);\nconsole.log("Sorted:", [...numbers].sort((a,b)=>a-b));';run.textContent='Run ↗';run.dataset.mode='js';out.textContent='Press Run to execute the algorithm.'};sw.addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;sw.querySelectorAll('button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');e.target.dataset.lab==='css'?cssMode():e.target.dataset.lab==='algo'?algoMode():jsMode()});run.addEventListener('click',()=>{if(run.dataset.mode!=='css')return;const frame=document.createElement('iframe');frame.sandbox='allow-scripts';frame.title='CSS motion preview';frame.style.cssText='width:100%;height:150px;border:0;border-top:1px solid rgba(255,255,255,.08);background:#08080c';frame.srcdoc='<!doctype html><style>body{margin:0;display:grid;place-items:center;height:100vh;background:#08080c}.orb{width:70px;height:70px;border-radius:50%;background:#baff45;animation:pulse 1.4s infinite alternate}@keyframes pulse{to{transform:scale(1.6)}}</style><div class="orb"></div>';box.appendChild(frame);out.textContent='CSS preview rendered in a sandboxed frame.';setTimeout(()=>frame.remove(),8000)});jsMode()}
+async function load(){if(!grid)return;const old=cache();if(old){render(old);addDashboard(old);addLabSwitcher();return}try{const r=await fetch('https://api.github.com/users/TEJAS-MK2/repos?per_page=100&sort=updated',{headers:{Accept:'application/vnd.github+json'}});if(!r.ok)throw Error(`GitHub ${r.status}`);const repos=await r.json(),byName=new Map(repos.map(r=>[r.name.toLowerCase(),r])),selected=featured.map(p=>({...p,data:byName.get(p.repo.toLowerCase())||null}));save(selected);render(selected);addDashboard(selected);addLabSwitcher()}catch{render(featured);addDashboard(featured);addLabSwitcher()}}
 load();
