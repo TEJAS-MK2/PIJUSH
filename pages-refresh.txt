@@ -1,0 +1,3 @@
+GitHub Pages deployment refresh marker.
+
+This file intentionally contains no site content. It exists to trigger a fresh Pages deployment from main so the deployed artifact is rebuilt from the current repository state.
